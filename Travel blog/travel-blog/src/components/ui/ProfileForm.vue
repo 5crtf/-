@@ -32,12 +32,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useUserStore } from '../../store/user'
+import { updateProfile } from '../../api'
 
-const fullname = ref('')
-const city = ref('')
-const about = ref('')
+const user = useUserStore()
+
+const fullname = ref(user.profile?.full_name || '')
+const city = ref(user.profile?.city || '')
+const about = ref(user.profile?.bio || '')
 const photo = ref<File|null>(null)
-const photoUrl = ref('')
+const photoUrl = ref(user.profile?.photo ? `https://travelblog.skillbox.cc${user.profile.photo}` : '')
 const password = ref('')
 const error = ref('')
 
@@ -52,14 +56,24 @@ function onFileChange(e: Event) {
   photoUrl.value = URL.createObjectURL(file)
 }
 
-function onSubmit() {
+async function onSubmit() {
   error.value = ''
   if (!fullname.value) {
     error.value = 'Ф. И. О. обязательно'
     return
   }
-  // Здесь будет отправка данных через API
-  alert('Профиль сохранён!')
+  try {
+    await updateProfile({
+      full_name: fullname.value,
+      city: city.value,
+      bio: about.value,
+      photo: photo.value || undefined,
+    })
+    await user.fetchProfile()
+    alert('Профиль сохранён!')
+  } catch (e: any) {
+    error.value = e.message || 'Ошибка сохранения профиля'
+  }
 }
 </script>
 

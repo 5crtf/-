@@ -20,15 +20,12 @@
     </div>
     <div class="comments-block">
       <h2>Отзывы</h2>
-      <button class="add-comment-btn" @click="showForm = !showForm" v-if="!showForm && isAuth">Ваше впечатление об этом месте</button>
-      <CommentForm v-if="showForm && isAuth" @submit-comment="addCommentHandler" />
+      <router-link v-if="isAuth" class="add-comment-btn" :to="`/post/${route.params.id}/add-comment`">Ваше впечатление об этом месте</router-link>
       <div class="comments-list">
-        <div class="comment" v-for="comment in post.comments || []" :key="comment.id">
-          <div class="comment-header">
-            <span class="comment-author">{{ comment.name }}</span>
-            <span class="comment-date">{{ formatDate(comment.created_at) }}</span>
-          </div>
-          <div class="comment-text">{{ comment.text }}</div>
+        <div class="comment" v-for="(comment, idx) in post.comments || []" :key="idx">
+          <div class="comment-author">{{ comment.author_name }}</div>
+          <div class="comment-date">{{ formatDate(comment.created_at) }}</div>
+          <div class="comment-text">{{ comment.comment }}</div>
         </div>
         <div v-if="(post.comments || []).length === 0" class="empty">Отзывов пока нет</div>
       </div>
@@ -97,7 +94,7 @@ onMounted(fetchPost)
   background: #fff;
   border-radius: var(--border-radius);
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  margin-bottom: 2rem;
+  margin-bottom: 3px;
   overflow: hidden;
 }
 .post-image {
@@ -153,7 +150,7 @@ onMounted(fetchPost)
   background: #fff;
   border-radius: var(--border-radius);
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  padding: 2rem 1.5rem;
+  padding: 32px 24px;
 }
 .comments-block h2 {
   margin-top: 0;
@@ -176,28 +173,29 @@ onMounted(fetchPost)
 .comments-list {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 12px;
 }
 .comment {
   background: #f7f8fa;
   border-radius: 8px;
-  padding: 1rem 1.2rem;
-}
-.comment-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
+  padding: 16px 19px;
 }
 .comment-author {
   font-weight: 600;
+  font-size: 1.05rem;
+  margin-bottom: 0.2rem;
+  text-align: left;
 }
 .comment-date {
   color: var(--color-muted);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
 }
 .comment-text {
   font-size: 1rem;
+  color: var(--color-text);
+  text-align: left;
 }
 @media (max-width: 900px) {
   .post-main {

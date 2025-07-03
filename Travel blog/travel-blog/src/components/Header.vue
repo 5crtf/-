@@ -8,8 +8,10 @@
       </nav>
       <div class="actions">
         <router-link v-if="!isAuth" to="/login" class="btn">Войти</router-link>
-        <router-link v-else to="/profile" class="profile-icon">
-          <span class="icon">{{ user.profile?.full_name?.[0] || '👤' }}</span>
+        <router-link v-else to="/profile" class="profile-info">
+          <span v-if="user.profile?.photo" class="avatar" :style="`background-image: url('https://travelblog.skillbox.cc${user.profile.photo}')`"></span>
+          <span v-else class="avatar avatar-placeholder">{{ user.profile?.full_name?.[0] || '👤' }}</span>
+          <span class="profile-name">{{ user.profile?.full_name }}</span>
         </router-link>
         <button v-if="isAuth" class="btn logout" @click="onLogout">Выйти</button>
       </div>
@@ -88,10 +90,31 @@ nav a.router-link-exact-active {
 .btn.logout {
   background: var(--color-muted);
 }
-.profile-icon {
+.profile-info {
   display: flex;
   align-items: center;
-  font-size: 1.5rem;
+  gap: 8px;
+  text-decoration: none;
+}
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-color: #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #fff;
+}
+.avatar-placeholder {
+  background: #bdbdbd;
+}
+.profile-name {
+  font-size: 1.05rem;
+  font-weight: 500;
   color: var(--color-primary);
 }
 @media (max-width: 700px) {
