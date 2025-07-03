@@ -1,7 +1,6 @@
 <template>
   <div class="posts-container">
     <div class="posts-header">
-      <h1>Там, где мир начинается с путешествий</h1>
       <router-link v-if="isAuth" to="/create" class="add-btn">Добавить моё путешествие</router-link>
     </div>
     <div v-if="loading" class="loader">Загрузка...</div>
@@ -66,7 +65,7 @@ onMounted(fetchPosts)
 .posts-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-bottom: 2rem;
 }
 .posts-header h1 {

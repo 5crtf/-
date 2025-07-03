@@ -1,10 +1,12 @@
 <template>
-  <header>
+  <header class="header-bg">
     <div class="container">
-      <div class="logo">TravelBlog</div>
+      <div class="header-left">
+        <div class="logo">TravelBlog</div>
+        <div class="header-slogan">Там, где мир начинается с путешествий</div>
+      </div>
       <nav>
         <router-link to="/">Путешествия</router-link>
-        <router-link to="/create" v-if="isAuth">Добавить моё путешествие</router-link>
       </nav>
       <div class="actions">
         <router-link v-if="!isAuth" to="/login" class="btn">Войти</router-link>
@@ -36,12 +38,23 @@ async function onLogout() {
 </script>
 
 <style scoped>
-header {
-  background: var(--color-header);
-  height: var(--header-height);
+.header-bg {
+  width: 100vw;
+  min-width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  position: relative;
+  background: url('/img/1. Основная страница (Первая).png') center/cover no-repeat;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   display: flex;
   align-items: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  height: 250px;
+  min-height: 250px;
+  margin-top: 0;
 }
 .container {
   width: 100%;
@@ -52,25 +65,52 @@ header {
   justify-content: space-between;
   height: 100%;
   padding: 0 var(--gap);
+  z-index: 2;
+}
+.header-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 .logo {
-  font-size: 1.7rem;
+  font-size: 27px;
   font-weight: bold;
   color: var(--color-primary);
+}
+.header-slogan {
+  margin-top: 8px;
+  font-size: 22px;
+  font-weight: 400;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  letter-spacing: 0.5px;
 }
 nav {
   display: flex;
   gap: var(--gap);
 }
 nav a {
-  color: var(--color-text);
+  color: var(--color-text-btn);
   text-decoration: none;
-  font-weight: 500;
-  font-size: 1.1rem;
-  transition: color 0.2s;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  margin-right: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  border: 2px solid var(--color-primary);
+  transition: background 0.2s, color 0.2s, border 0.2s;
 }
 nav a.router-link-exact-active {
   color: var(--color-primary);
+  background: var(--color-secondary);
+  border-color: var(--color-secondary);
+  color: #fff;
+}
+nav a:hover {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
 }
 .actions {
   display: flex;
@@ -106,14 +146,14 @@ nav a.router-link-exact-active {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 19px;
   color: #fff;
 }
 .avatar-placeholder {
   background: #bdbdbd;
 }
 .profile-name {
-  font-size: 1.05rem;
+  font-size: 17px;
   font-weight: 500;
   color: var(--color-primary);
 }
