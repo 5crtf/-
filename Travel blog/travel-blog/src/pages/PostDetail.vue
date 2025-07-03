@@ -21,7 +21,7 @@
     <div class="comments-block">
       <h2>Отзывы</h2>
       <button class="add-comment-btn" @click="showForm = !showForm" v-if="!showForm && isAuth">Ваше впечатление об этом месте</button>
-      <CommentForm v-if="showForm && isAuth" @submit-comment="addComment" />
+      <CommentForm v-if="showForm && isAuth" @submit-comment="addCommentHandler" />
       <div class="comments-list">
         <div class="comment" v-for="comment in post.comments || []" :key="comment.id">
           <div class="comment-header">
@@ -67,9 +67,9 @@ async function fetchPost() {
   }
 }
 
-async function addCommentHandler({ name, comment }: { name: string; comment: string }) {
+async function addCommentHandler({ full_name, comment }: { full_name: string; comment: string }) {
   try {
-    await addComment(Number(route.params.id), { name, text: comment })
+    await addComment(Number(route.params.id), { full_name, comment })
     showForm.value = false
     await fetchPost()
   } catch (e: any) {

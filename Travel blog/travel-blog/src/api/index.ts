@@ -89,11 +89,11 @@ export async function changePassword(password: string) {
 }
 
 // Добавить комментарий к посту
-export async function addComment(postId: number, data: { name: string; text: string }) {
+export async function addComment(postId: number, data: { full_name: string; comment: string }) {
   return apiRequest(`/posts/${postId}/comments`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: data.name, text: data.text })
+    body: JSON.stringify({ full_name: data.full_name, comment: data.comment })
   })
 }
 

@@ -13,13 +13,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, defineEmits } from 'vue'
 
 const name = ref('')
 const comment = ref('')
 
+const emit = defineEmits(['submit-comment'])
+
 function onSubmit() {
-  alert(`Комментарий отправлен!\nИмя: ${name.value}\nТекст: ${comment.value}`)
+  emit('submit-comment', { full_name: name.value, comment: comment.value })
   name.value = ''
   comment.value = ''
 }
