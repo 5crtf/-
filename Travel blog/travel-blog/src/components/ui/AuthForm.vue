@@ -1,0 +1,103 @@
+<template>
+  <form class="auth-form" @submit.prevent="handleSubmit">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" v-model="email" type="email" required />
+    </div>
+    <div class="form-group">
+      <label for="password">Пароль</label>
+      <input id="password" v-model="password" type="password" required minlength="6" />
+    </div>
+    <div v-if="isRegister" class="form-group">
+      <label for="confirm">Подтверждение пароля</label>
+      <input id="confirm" v-model="confirm" type="password" required minlength="6" />
+    </div>
+    <div v-if="error" class="error">{{ error }}</div>
+    <button class="submit-btn" type="submit">{{ isRegister ? 'Зарегистрироваться' : 'Войти' }}</button>
+  </form>
+</template>
+
+<script setup lang="ts">
+import { ref, computed, watch } from 'vue'
+
+const props = defineProps<{
+  isRegister?: boolean
+  onSubmit?: (data: { email: string; password: string }) => void
+}>()
+
+const email = ref('')
+const password = ref('')
+const confirm = ref('')
+const error = ref('')
+
+function handleSubmit() {
+  error.value = ''
+  if (!email.value.match(/^\S+@\S+\.\S+$/)) {
+    error.value = 'Введите корректный email'
+    return
+  }
+  if (password.value.length < 6) {
+    error.value = 'Пароль должен быть не менее 6 символов'
+    return
+  }
+  if (props.isRegister && password.value !== confirm.value) {
+    error.value = 'Пароли не совпадают'
+    return
+  }
+  props.onSubmit?.({ email: email.value, password: password.value })
+}
+</script>
+
+<style scoped>
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 400px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 2rem 2.5rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+label {
+  font-weight: 500;
+  font-size: 1rem;
+}
+input {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0.7em 1em;
+  font-size: 1rem;
+  font-family: inherit;
+}
+input:focus {
+  outline: 2px solid var(--color-primary);
+  border-color: var(--color-primary);
+}
+.submit-btn {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7em 1.5em;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s;
+}
+.submit-btn:hover {
+  background: var(--color-secondary);
+}
+.error {
+  color: #e74c3c;
+  font-size: 1rem;
+  margin-top: -0.5rem;
+}
+</style> 

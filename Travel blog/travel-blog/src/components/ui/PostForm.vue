@@ -1,0 +1,172 @@
+<template>
+  <form class="post-form" @submit.prevent="onSubmit">
+    <div class="form-group">
+      <label for="title">Заголовок</label>
+      <input id="title" v-model="title" type="text" maxlength="255" required />
+    </div>
+    <div class="form-group">
+      <label for="description">Описание</label>
+      <textarea id="description" v-model="description" maxlength="2000" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="image">Фотография (JPEG/PNG)</label>
+      <input id="image" type="file" accept="image/jpeg,image/png" @change="onFileChange" required />
+      <div v-if="imageUrl" class="img-preview">
+        <img :src="imageUrl" alt="preview" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="country">Страна</label>
+        <input id="country" v-model="country" type="text" maxlength="255" required />
+      </div>
+      <div class="form-group">
+        <label for="city">Город</label>
+        <input id="city" v-model="city" type="text" maxlength="255" required />
+      </div>
+    </div>
+    <div v-if="error" class="error">{{ error }}</div>
+    <div v-if="loading" class="loader">Публикация...</div>
+    <button class="submit-btn" type="submit" :disabled="loading">Опубликовать</button>
+  </form>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { createPost } from '../../api'
+import { useRouter } from 'vue-router'
+
+const title = ref('')
+const description = ref('')
+const country = ref('')
+const city = ref('')
+const image = ref<File|null>(null)
+const imageUrl = ref('')
+const error = ref('')
+const loading = ref(false)
+const router = useRouter()
+
+function onFileChange(e: Event) {
+  const file = (e.target as HTMLInputElement).files?.[0]
+  if (!file) return
+  if (!['image/jpeg', 'image/png'].includes(file.type)) {
+    error.value = 'Только JPEG или PNG'
+    return
+  }
+  image.value = file
+  imageUrl.value = URL.createObjectURL(file)
+}
+
+async function onSubmit() {
+  error.value = ''
+  if (!title.value || !description.value || !country.value || !city.value || !image.value) {
+    error.value = 'Заполните все поля'
+    return
+  }
+  loading.value = true
+  try {
+    await createPost({
+      title: title.value,
+      description: description.value,
+      country: country.value,
+      city: city.value,
+      photo: image.value,
+    })
+    title.value = ''
+    description.value = ''
+    country.value = ''
+    city.value = ''
+    image.value = null
+    imageUrl.value = ''
+    router.push('/')
+  } catch (e: any) {
+    error.value = e.message || 'Ошибка публикации'
+  } finally {
+    loading.value = false
+  }
+}
+</script>
+
+<style scoped>
+.post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 2rem 2.5rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+.form-row {
+  display: flex;
+  gap: 1.2rem;
+}
+label {
+  font-weight: 500;
+  font-size: 1rem;
+}
+input, textarea {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0.7em 1em;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: none;
+}
+input:focus, textarea:focus {
+  outline: 2px solid var(--color-primary);
+  border-color: var(--color-primary);
+}
+.img-preview {
+  margin-top: 0.5rem;
+}
+.img-preview img {
+  max-width: 180px;
+  max-height: 120px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.submit-btn {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7em 1.5em;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s;
+}
+.submit-btn:hover {
+  background: var(--color-secondary);
+}
+.error {
+  color: #e74c3c;
+  font-size: 1rem;
+  margin-top: -0.5rem;
+}
+.loader {
+  text-align: center;
+  color: var(--color-primary);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+@media (max-width: 700px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .post-form {
+    padding: 1.2rem 0.5rem;
+  }
+}
+</style> 

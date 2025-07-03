@@ -1,0 +1,13 @@
+:root {
+  --color-primary: #4f8cff;
+  --color-secondary: #ffb347;
+  --color-bg: #f7f8fa;
+  --color-header: #fff;
+  --color-text: #222;
+  --color-muted: #888;
+  --border-radius: 16px;
+  --font-main: 'Inter', 'Arial', sans-serif;
+  --container-width: 1200px;
+  --header-height: 72px;
+  --gap: 24px;
+} 
