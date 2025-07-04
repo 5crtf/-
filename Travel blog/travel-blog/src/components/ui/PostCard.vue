@@ -30,6 +30,8 @@ defineProps<{
   min-height: 320px;
   cursor: pointer;
   transition: box-shadow 0.2s;
+  padding: 19px;
+  font-size: 20.8px;
 }
 .post-card:hover {
   box-shadow: 0 4px 16px rgba(0,0,0,0.10);
@@ -49,7 +51,7 @@ defineProps<{
   justify-content: space-between;
 }
 .post-info h2 {
-  font-size: 1.3rem;
+  font-size: 16px;
   margin: 0 0 0.5em 0;
 }
 .desc {
@@ -58,7 +60,7 @@ defineProps<{
   margin-bottom: 1em;
 }
 .meta {
-  font-size: 0.95rem;
+  font-size: 15.2px;
   color: var(--color-text);
 }
 </style> 

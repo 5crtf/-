@@ -86,11 +86,11 @@ onMounted(fetchPost)
 .post-detail-container {
   max-width: var(--container-width);
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 32px 16px;
 }
 .post-main {
   display: flex;
-  gap: 2rem;
+  gap: 32px;
   background: #fff;
   border-radius: var(--border-radius);
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
@@ -105,24 +105,24 @@ onMounted(fetchPost)
 }
 .post-content {
   flex: 1;
-  padding: 2rem 1.5rem;
+  padding: 32px 24px;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 19px;
 }
 .post-content h1 {
-  font-size: 2rem;
+  font-size: 32px;
   margin: 0;
 }
 .meta {
   color: var(--color-muted);
-  font-size: 1.1rem;
+  font-size: 17.6px;
 }
 .author {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin: 1rem 0;
+  gap: 16px;
+  margin: 16px 0;
 }
 .avatar {
   width: 56px;
@@ -182,22 +182,22 @@ onMounted(fetchPost)
 }
 .comment-author {
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: 17.6px;
   margin-bottom: 0.2rem;
   text-align: left;
 }
 .comment-date {
   color: var(--color-muted);
-  font-size: 0.92rem;
+  font-size: 15.2px;
   margin-bottom: 0.5rem;
   text-align: left;
 }
 .comment-text {
-  font-size: 1rem;
+  font-size: 15.2px;
   color: var(--color-text);
   text-align: left;
 }
-@media (max-width: 900px) {
+@media (max-width: 700px) {
   .post-main {
     flex-direction: column;
     align-items: center;
@@ -207,7 +207,7 @@ onMounted(fetchPost)
     height: 220px;
   }
   .post-content {
-    padding: 1.2rem 0.5rem;
+    padding: 19px 8px;
   }
 }
 </style> 

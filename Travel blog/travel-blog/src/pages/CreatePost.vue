@@ -12,12 +12,15 @@ import PostForm from '../components/ui/PostForm.vue'
 <style scoped>
 .create-post-page {
   max-width: 700px;
-  margin: 3rem auto;
-  padding: 2rem 1rem;
+  margin: 48px auto;
+  padding: 32px 16px;
   background: none;
 }
 h1 {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
+}
+.form-group {
+  margin-top: 32px;
 }
 </style> 

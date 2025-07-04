@@ -24,18 +24,18 @@ async function onLogin(data: { email: string; password: string }) {
 <style scoped>
 .auth-page {
   max-width: 500px;
-  margin: 3rem auto;
-  padding: 2rem 1rem;
+  margin: 48px auto;
+  padding: 32px 16px;
   background: none;
 }
 h1 {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
 }
 .error {
   color: #e74c3c;
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 16px;
 }
 .register-link {
   display: block;
@@ -43,10 +43,19 @@ h1 {
   margin-top: 2rem;
   color: var(--color-primary);
   text-decoration: underline;
-  font-size: 1.05rem;
+  font-size: 16.8px;
   transition: color 0.2s;
 }
 .register-link:hover {
   color: var(--color-secondary);
+}
+.form-group {
+  margin-top: 32px;
+}
+.form-footer {
+  margin-top: 32px;
+}
+.form-link {
+  font-size: 16.8px;
 }
 </style> 

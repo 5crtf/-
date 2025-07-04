@@ -60,7 +60,7 @@ onMounted(fetchPosts)
 .posts-container {
   max-width: var(--container-width);
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 32px 16px;
 }
 .posts-header {
   display: flex;
@@ -100,6 +100,7 @@ onMounted(fetchPosts)
   display: flex;
   flex-direction: column;
   min-height: 320px;
+  font-size: 17.6px;
 }
 .post-img {
   background: #e0e7ef;
@@ -141,5 +142,26 @@ onMounted(fetchPosts)
   color: var(--color-muted);
   text-align: center;
   margin: 2rem 0;
+}
+.post-card__footer {
+  font-size: 20.8px;
+}
+.post-card__meta {
+  font-size: 17.6px;
+}
+.post-card__author {
+  font-size: 15.2px;
+}
+.post-card__comments {
+  font-size: 19.2px;
+}
+.post-card__actions {
+  margin: 32px 0;
+}
+.post-card__actions--bottom {
+  margin: 32px 0;
+}
+.post-card__actions--top {
+  margin: 32px 0;
 }
 </style> 

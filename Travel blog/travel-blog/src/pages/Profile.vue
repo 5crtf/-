@@ -109,4 +109,24 @@ onMounted(fetchUserPosts)
   text-align: center;
   margin: 2rem 0;
 }
+.profile {
+  gap: 24px;
+  margin: 32px 0 40px 0;
+}
+.profile-info {
+  font-size: 17.6px;
+}
+.profile-actions {
+  margin-top: 24px;
+}
+.profile-posts {
+  font-size: 17.6px;
+  margin: 32px 0;
+}
+.profile-comments {
+  margin: 32px 0;
+}
+.profile-favorites {
+  margin: 32px 0;
+}
 </style>

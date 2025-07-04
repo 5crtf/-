@@ -49,35 +49,35 @@ async function onSubmit() {
 <style scoped>
 .add-comment-page {
   max-width: 500px;
-  margin: 3rem auto;
-  padding: 2rem 1rem;
+  margin: 48px auto;
+  padding: 32px 16px;
   background: #fff;
   border-radius: var(--border-radius);
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 h1 {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
 }
 .comment-form {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 19px;
 }
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
 }
 label {
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 17.6px;
 }
 input, textarea {
   border: 1px solid #d1d5db;
   border-radius: 8px;
   padding: 0.7em 1em;
-  font-size: 1rem;
+  font-size: 17.6px;
   font-family: inherit;
   resize: none;
 }
@@ -91,7 +91,7 @@ input:focus, textarea:focus {
   border: none;
   border-radius: 8px;
   padding: 0.7em 1.5em;
-  font-size: 1.1rem;
+  font-size: 17.6px;
   font-weight: 500;
   cursor: pointer;
   align-self: flex-start;
@@ -102,6 +102,6 @@ input:focus, textarea:focus {
 }
 .error {
   color: #e74c3c;
-  font-size: 1rem;
+  font-size: 17.6px;
 }
 </style> 

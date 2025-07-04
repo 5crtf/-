@@ -91,33 +91,33 @@ async function onSubmit() {
 .post-form {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 19px;
   max-width: 600px;
   margin: 0 auto;
   background: #fff;
   border-radius: var(--border-radius);
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  padding: 2rem 2.5rem;
+  padding: 32px 40px;
 }
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 19px;
   flex: 1;
 }
 .form-row {
   display: flex;
-  gap: 1.2rem;
+  gap: 8px;
 }
 label {
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 16px;
 }
 input, textarea {
   border: 1px solid #d1d5db;
   border-radius: 8px;
   padding: 0.7em 1em;
-  font-size: 1rem;
+  font-size: 16px;
   font-family: inherit;
   resize: none;
 }
@@ -126,7 +126,7 @@ input:focus, textarea:focus {
   border-color: var(--color-primary);
 }
 .img-preview {
-  margin-top: 0.5rem;
+  margin-top: 8px;
 }
 .img-preview img {
   max-width: 180px;
@@ -139,11 +139,11 @@ input:focus, textarea:focus {
   color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 0.7em 1.5em;
-  font-size: 1.1rem;
+  padding: 11px 24px;
+  font-size: 17.6px;
   font-weight: 500;
   cursor: pointer;
-  margin-top: 0.5rem;
+  margin-top: 8px;
   transition: background 0.2s;
 }
 .submit-btn:hover {
@@ -151,22 +151,22 @@ input:focus, textarea:focus {
 }
 .error {
   color: #e74c3c;
-  font-size: 1rem;
-  margin-top: -0.5rem;
+  font-size: 16px;
+  margin-top: -8px;
 }
 .loader {
   text-align: center;
   color: var(--color-primary);
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
+  font-size: 17.6px;
+  margin-bottom: 16px;
 }
 @media (max-width: 700px) {
   .form-row {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 8px;
   }
   .post-form {
-    padding: 1.2rem 0.5rem;
+    padding: 19px 8px;
   }
 }
 </style> 

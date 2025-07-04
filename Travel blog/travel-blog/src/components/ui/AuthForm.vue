@@ -52,28 +52,28 @@ function handleSubmit() {
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 19px;
   max-width: 400px;
   margin: 0 auto;
   background: #fff;
   border-radius: var(--border-radius);
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  padding: 2rem 2.5rem;
+  padding: 32px 40px;
 }
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
 }
 label {
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 16px;
 }
 input {
   border: 1px solid #d1d5db;
   border-radius: 8px;
   padding: 0.7em 1em;
-  font-size: 1rem;
+  font-size: 16px;
   font-family: inherit;
 }
 input:focus {
@@ -86,10 +86,10 @@ input:focus {
   border: none;
   border-radius: 8px;
   padding: 0.7em 1.5em;
-  font-size: 1.1rem;
+  font-size: 17.6px;
   font-weight: 500;
   cursor: pointer;
-  margin-top: 0.5rem;
+  margin-top: 8px;
   transition: background 0.2s;
 }
 .submit-btn:hover {
@@ -97,7 +97,7 @@ input:focus {
 }
 .error {
   color: #e74c3c;
-  font-size: 1rem;
-  margin-top: -0.5rem;
+  font-size: 16px;
+  margin-top: -8px;
 }
 </style> 

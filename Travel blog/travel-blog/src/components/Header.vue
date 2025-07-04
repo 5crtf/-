@@ -123,7 +123,7 @@ nav a:hover {
   border: none;
   border-radius: 8px;
   padding: 0.5em 1.2em;
-  font-size: 1rem;
+  font-size: 16px;
   cursor: pointer;
   transition: background 0.2s;
 }

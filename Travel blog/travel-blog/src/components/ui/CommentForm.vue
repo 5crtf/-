@@ -31,23 +31,23 @@ function onSubmit() {
 .comment-form {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-  margin-bottom: 2rem;
+  gap: 19px;
+  margin-bottom: 32px;
 }
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
 }
 label {
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 16px;
 }
 input, textarea {
   border: 1px solid #d1d5db;
   border-radius: 8px;
   padding: 0.7em 1em;
-  font-size: 1rem;
+  font-size: 16px;
   font-family: inherit;
   resize: none;
 }
@@ -61,7 +61,7 @@ input:focus, textarea:focus {
   border: none;
   border-radius: 8px;
   padding: 0.7em 1.5em;
-  font-size: 1.1rem;
+  font-size: 17.6px;
   font-weight: 500;
   cursor: pointer;
   align-self: flex-start;
@@ -69,5 +69,8 @@ input:focus, textarea:focus {
 }
 .submit-btn:hover {
   background: var(--color-secondary);
+}
+.error {
+  font-size: 16px;
 }
 </style> 
