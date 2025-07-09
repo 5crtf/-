@@ -5,9 +5,6 @@
         <div class="logo">TravelBlog</div>
         <div class="header-slogan">Там, где мир начинается с путешествий</div>
       </div>
-      <nav>
-        <router-link to="/">Путешествия</router-link>
-      </nav>
       <div class="actions">
         <router-link v-if="!isAuth" to="/login" class="btn">Войти</router-link>
         <router-link v-else to="/profile" class="profile-info">
@@ -39,13 +36,12 @@ async function onLogout() {
 
 <style scoped>
 .header-bg {
-  width: 100vw;
-  min-width: 100vw;
+  position: relative;
   left: 50%;
   right: 50%;
+  width: 100vw;
   margin-left: -50vw;
   margin-right: -50vw;
-  position: relative;
   background: url('/img/1. Основная страница (Первая).png') center/cover no-repeat;
   background-size: cover;
   background-position: center;
@@ -156,6 +152,18 @@ nav a:hover {
   font-size: 17px;
   font-weight: 500;
   color: var(--color-primary);
+}
+.back-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-primary);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0 8px 0 0;
+  transition: color 0.2s;
+}
+.back-btn:hover {
+  color: var(--color-secondary);
 }
 @media (max-width: 700px) {
   .container {

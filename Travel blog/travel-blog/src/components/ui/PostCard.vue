@@ -30,7 +30,7 @@ defineProps<{
   min-height: 320px;
   cursor: pointer;
   transition: box-shadow 0.2s;
-  padding: 19px;
+
   font-size: 20.8px;
 }
 .post-card:hover {
@@ -44,10 +44,11 @@ defineProps<{
   width: 100%;
 }
 .post-info {
-  padding: 1.2rem;
+  padding: 25px;
   flex: 1;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   justify-content: space-between;
 }
 .post-info h2 {

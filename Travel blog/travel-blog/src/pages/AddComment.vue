@@ -11,7 +11,10 @@
         <textarea id="comment" v-model="comment" maxlength="600" required></textarea>
       </div>
       <div v-if="error" class="error">{{ error }}</div>
-      <button class="submit-btn" type="submit" :disabled="loading">Оставить отзыв</button>
+      <div class="form-actions">
+        <button class="back-btn" type="button" @click="goBack">← Назад</button>
+        <button class="submit-btn" type="submit" :disabled="loading">Оставить отзыв</button>
+      </div>
     </form>
   </div>
 </template>
@@ -27,6 +30,10 @@ const name = ref('')
 const comment = ref('')
 const error = ref('')
 const loading = ref(false)
+
+function goBack() {
+  router.back()
+}
 
 async function onSubmit() {
   error.value = ''
@@ -103,5 +110,29 @@ input:focus, textarea:focus {
 .error {
   color: #e74c3c;
   font-size: 17.6px;
+}
+.form-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 8px;
+}
+.back-btn {
+  background: transparent;
+  border: 2px solid var(--color-secondary);
+  color: var(--color-secondary);
+  font-size: 18px;
+  cursor: pointer;
+  width: 145px;
+  height: 50px;
+  padding: 0;
+  transition: color 0.2s, border 0.2s;
+  display: block;
+  border-radius: 8px;
+}
+.back-btn:hover {
+  color: #fff;
+  background: var(--color-secondary);
 }
 </style> 

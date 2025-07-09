@@ -1,49 +1,53 @@
 <template>
-  <div class="post-detail-container" v-if="!loading && !error">
-    <div class="post-main">
-      <div class="post-image" :style="post.photo ? `background-image: url(${apiUrl + post.photo})` : ''"></div>
-      <div class="post-content">
-        <h1>{{ post.title }}</h1>
-        <div class="meta">Страна: <b>{{ post.country }}</b> | Город: <b>{{ post.city }}</b></div>
-        <div class="author" v-if="post.user">
-          <div class="avatar" :style="post.user.photo ? `background-image: url(${apiUrl + post.user.photo})` : ''"></div>
-          <div>
-            <div class="name">{{ post.user.full_name }}</div>
-            <div class="city">{{ post.user.city }}</div>
-            <div class="about">{{ post.user.bio }}</div>
+  <div>
+    <div class="post-detail-container" v-if="!loading && !error">
+      <div class="post-main">
+        <div class="post-image" :style="post.photo ? `background-image: url(${apiUrl + post.photo})` : ''"></div>
+        <div class="post-content">
+          <h1>{{ post.title }}</h1>
+          <div class="meta">Страна: <b>{{ post.country }}</b> | Город: <b>{{ post.city }}</b></div>
+          <div class="author" v-if="post.user">
+            <div class="avatar" :style="post.user.photo ? `background-image: url(${apiUrl + post.user.photo})` : ''"></div>
+            <div>
+              <div class="name">{{ post.user.full_name }}</div>
+              <div class="city">{{ post.user.city }}</div>
+              <div class="about">{{ post.user.bio }}</div>
+            </div>
+          </div>
+          <div class="description">
+            {{ post.description }}
           </div>
         </div>
-        <div class="description">
-          {{ post.description }}
+      </div>
+      <div class="comments-block">
+        <h2>Отзывы</h2>
+        <div class="comments-list">
+          <div class="comment" v-for="(comment, idx) in post.comments || []" :key="idx">
+            <div class="comment-author">{{ comment.author_name }}</div>
+            <div class="comment-date">{{ formatDate(comment.created_at) }}</div>
+            <div class="comment-text">{{ comment.comment }}</div>
+          </div>
+          <div v-if="(post.comments || []).length === 0" class="empty">Отзывов пока нет</div>
+          <router-link v-if="isAuth" class="add-comment-btn" :to="`/post/${route.params.id}/add-comment`">Ваше впечатление об этом месте</router-link>
         </div>
       </div>
     </div>
-    <div class="comments-block">
-      <h2>Отзывы</h2>
-      <router-link v-if="isAuth" class="add-comment-btn" :to="`/post/${route.params.id}/add-comment`">Ваше впечатление об этом месте</router-link>
-      <div class="comments-list">
-        <div class="comment" v-for="(comment, idx) in post.comments || []" :key="idx">
-          <div class="comment-author">{{ comment.author_name }}</div>
-          <div class="comment-date">{{ formatDate(comment.created_at) }}</div>
-          <div class="comment-text">{{ comment.comment }}</div>
-        </div>
-        <div v-if="(post.comments || []).length === 0" class="empty">Отзывов пока нет</div>
-      </div>
-    </div>
+    <div v-else-if="loading" class="loader">Загрузка...</div>
+    <div v-else-if="error" class="error">{{ error }}</div>
+    <button class="back-btn" @click="goBack">← Назад</button>
   </div>
-  <div v-else-if="loading" class="loader">Загрузка...</div>
-  <div v-else-if="error" class="error">{{ error }}</div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { getPost, addComment } from '../api'
 import { useUserStore } from '../store/user'
 import CommentForm from '../components/ui/CommentForm.vue'
 
 const apiUrl = 'http://travelblog.skillbox.cc'
 const route = useRoute()
+const router = useRouter()
 const user = useUserStore()
 const isAuth = computed(() => !!user.token)
 
@@ -79,10 +83,32 @@ function formatDate(dateStr: string) {
   return d.toLocaleDateString()
 }
 
+function goBack() {
+  router.back()
+}
+
 onMounted(fetchPost)
 </script>
 
 <style scoped>
+.back-btn {
+  background: transparent;
+  border: 2px solid var(--color-secondary);
+  color: var(--color-secondary);
+  font-size: 18px;
+  cursor: pointer;
+  width: 145px;
+  height: 51px;
+  margin: 32px 0 0 0;
+  padding: 0;
+  transition: color 0.2s, border 0.2s;
+  display: block;
+  border-radius: 8px;
+}
+.back-btn:hover {
+  color: #fff;
+  background: var(--color-secondary);
+}
 .post-detail-container {
   max-width: var(--container-width);
   margin: 0 auto;
@@ -94,14 +120,15 @@ onMounted(fetchPost)
   background: #fff;
   border-radius: var(--border-radius);
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  margin-bottom: 3px;
+  margin-bottom: 20px;
   overflow: hidden;
 }
 .post-image {
   width: 340px;
-  height: 340px;
   background: #e0e7ef;
-  flex-shrink: 0;
+  flex-shrink: 1;
+  background-size: 340px 230px;
+  background-repeat: no-repeat;
 }
 .post-content {
   flex: 1;
@@ -163,7 +190,8 @@ onMounted(fetchPost)
   padding: 0.6em 1.2em;
   font-size: 1rem;
   font-weight: 500;
-  margin-bottom: 1.5rem;
+  margin-bottom: 24px;
+  margin: auto;
   cursor: pointer;
   transition: background 0.2s;
 }

@@ -27,7 +27,10 @@
     </div>
     <div v-if="error" class="error">{{ error }}</div>
     <div v-if="loading" class="loader">Публикация...</div>
-    <button class="submit-btn" type="submit" :disabled="loading">Опубликовать</button>
+    <div class="form-actions">
+      <button class="back-btn" type="button" @click="goBack">← Назад</button>
+      <button class="submit-btn" type="submit" :disabled="loading">Опубликовать</button>
+    </div>
   </form>
 </template>
 
@@ -55,6 +58,10 @@ function onFileChange(e: Event) {
   }
   image.value = file
   imageUrl.value = URL.createObjectURL(file)
+}
+
+function goBack() {
+  router.back()
 }
 
 async function onSubmit() {
@@ -143,7 +150,6 @@ input:focus, textarea:focus {
   font-size: 17.6px;
   font-weight: 500;
   cursor: pointer;
-  margin-top: 8px;
   transition: background 0.2s;
 }
 .submit-btn:hover {
@@ -159,6 +165,30 @@ input:focus, textarea:focus {
   color: var(--color-primary);
   font-size: 17.6px;
   margin-bottom: 16px;
+}
+.form-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 8px;
+}
+.back-btn {
+  background: transparent;
+  border: 2px solid var(--color-secondary);
+  color: var(--color-secondary);
+  font-size: 18px;
+  cursor: pointer;
+  width: 145px;
+  height: 50px;
+  padding: 0;
+  transition: color 0.2s, border 0.2s;
+  display: block;
+  border-radius: 8px;
+}
+.back-btn:hover {
+  color: #fff;
+  background: var(--color-secondary);
 }
 @media (max-width: 700px) {
   .form-row {

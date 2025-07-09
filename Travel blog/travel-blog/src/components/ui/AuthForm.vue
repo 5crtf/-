@@ -13,12 +13,17 @@
       <input id="confirm" v-model="confirm" type="password" required minlength="6" />
     </div>
     <div v-if="error" class="error">{{ error }}</div>
-    <button class="submit-btn" type="submit">{{ isRegister ? 'Зарегистрироваться' : 'Войти' }}</button>
+    <div v-if="isRegister" class="form-actions">
+      <button class="back-btn" type="button" @click="goBack">← Назад</button>
+      <button class="submit-btn" type="submit">Зарегистрироваться</button>
+    </div>
+    <button v-else class="submit-btn" type="submit">Войти</button>
   </form>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const props = defineProps<{
   isRegister?: boolean
@@ -29,6 +34,7 @@ const email = ref('')
 const password = ref('')
 const confirm = ref('')
 const error = ref('')
+const router = useRouter()
 
 function handleSubmit() {
   error.value = ''
@@ -45,6 +51,9 @@ function handleSubmit() {
     return
   }
   props.onSubmit?.({ email: email.value, password: password.value })
+}
+function goBack() {
+  router.back()
 }
 </script>
 
@@ -89,15 +98,38 @@ input:focus {
   font-size: 17.6px;
   font-weight: 500;
   cursor: pointer;
-  margin-top: 8px;
   transition: background 0.2s;
 }
 .submit-btn:hover {
   background: var(--color-secondary);
 }
+
 .error {
   color: #e74c3c;
   font-size: 16px;
   margin-top: -8px;
+}
+.form-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-top: 8px;
+}
+.back-btn {
+  background: transparent;
+  border: 2px solid var(--color-secondary);
+  color: var(--color-secondary);
+  font-size: 18px;
+  cursor: pointer;
+  width: 145px;
+  height: 45px;
+  padding: 0;
+  transition: color 0.2s, border 0.2s;
+  display: block;
+  border-radius: 8px;
+}
+.back-btn:hover {
+  color: #fff;
+  background: var(--color-secondary);
 }
 </style> 
