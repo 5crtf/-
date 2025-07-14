@@ -43,7 +43,6 @@ function goBack() {
   background: var(--color-secondary);
 }
 .auth-page {
-  max-width: 500px;
   margin: 48px auto;
   padding: 32px 16px;
   background: none;

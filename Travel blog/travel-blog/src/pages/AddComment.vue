@@ -1,6 +1,6 @@
 <template>
   <div class="add-comment-page">
-    <h1>Добавить отзыв</h1>
+    <h1>Добавление отзыва</h1>
     <form class="comment-form" @submit.prevent="onSubmit">
       <div class="form-group">
         <label for="name">Ваше имя</label>
@@ -13,7 +13,7 @@
       <div v-if="error" class="error">{{ error }}</div>
       <div class="form-actions">
         <button class="back-btn" type="button" @click="goBack">← Назад</button>
-        <button class="submit-btn" type="submit" :disabled="loading">Оставить отзыв</button>
+        <button class="submit-btn" type="submit" :disabled="loading">Сохранить</button>
       </div>
     </form>
   </div>
@@ -63,8 +63,12 @@ async function onSubmit() {
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 h1 {
-  text-align: center;
   margin-bottom: 32px;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 54px;
+  text-align: center;
+  color: #141414;
 }
 .comment-form {
   display: flex;

@@ -29,7 +29,7 @@ import PostForm from '../components/ui/PostForm.vue'
   background: var(--color-secondary);
 }
 .create-post-page {
-  max-width: 700px;
+  max-width: 900px;
   margin: 48px auto;
   padding: 32px 16px;
   background: none;

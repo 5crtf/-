@@ -1,6 +1,5 @@
 <template>
   <div class="profile-page">
-    <h1>Профиль пользователя</h1>
     <div class="tabs">
       <button :class="{active: tab==='profile'}" @click="tab='profile'">Профиль</button>
       <button :class="{active: tab==='posts'}" @click="tab='posts'">Мои путешествия</button>

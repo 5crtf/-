@@ -1,8 +1,5 @@
 <template>
   <div class="posts-container">
-    <div class="posts-header">
-      <router-link v-if="isAuth" to="/create" class="add-btn">Добавить моё путешествие</router-link>
-    </div>
     <div v-if="loading" class="loader">Загрузка...</div>
     <div v-else-if="error" class="error">{{ error }}</div>
     <div v-else-if="posts.length === 0" class="empty">Постов пока нет</div>
@@ -17,6 +14,9 @@
         :image="post.photo ? apiUrl + post.photo : ''"
         @click="goToPost(post.id)"
       />
+    </div>
+    <div class="posts-header">
+      <router-link v-if="isAuth" to="/create" class="add-btn">Добавить моё путешествие</router-link>
     </div>
   </div>
 </template>
@@ -65,8 +65,7 @@ onMounted(fetchPosts)
 .posts-header {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  margin-bottom: 2rem;
+  justify-content: center;
 }
 .posts-header h1 {
   font-size: 2.2rem;
@@ -90,7 +89,8 @@ onMounted(fetchPosts)
 .posts-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: var(--gap);
+  gap: 30px;
+  margin-bottom: 60px;
 }
 .post-card {
   background: #fff;

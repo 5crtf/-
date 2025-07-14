@@ -190,6 +190,12 @@ input:focus, textarea:focus {
   color: #fff;
   background: var(--color-secondary);
 }
+
+#image {
+  display: block;
+  min-width:260px;
+}
+
 @media (max-width: 700px) {
   .form-row {
     flex-direction: column;

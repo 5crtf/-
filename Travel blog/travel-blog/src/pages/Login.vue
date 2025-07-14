@@ -1,9 +1,9 @@
 <template>
   <div class="auth-page">
-    <h1>Вход</h1>
+    <h1>Вход в профиль</h1>
     <AuthForm :onSubmit="onLogin" />
     <div v-if="user.error" class="error">{{ user.error }}</div>
-    <router-link to="/register" class="register-link">Нет аккаунта? Зарегистрироваться</router-link>
+    <router-link to="/register" class="register-link">Зарегистрироваться</router-link>
   </div>
 </template>
 

@@ -14,7 +14,6 @@
     </div>
     <div v-if="error" class="error">{{ error }}</div>
     <div v-if="isRegister" class="form-actions">
-      <button class="back-btn" type="button" @click="goBack">← Назад</button>
       <button class="submit-btn" type="submit">Зарегистрироваться</button>
     </div>
     <button v-else class="submit-btn" type="submit">Войти</button>
@@ -52,9 +51,6 @@ function handleSubmit() {
   }
   props.onSubmit?.({ email: email.value, password: password.value })
 }
-function goBack() {
-  router.back()
-}
 </script>
 
 <style scoped>
@@ -69,6 +65,7 @@ function goBack() {
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   padding: 32px 40px;
 }
+
 .form-group {
   display: flex;
   flex-direction: column;
@@ -114,22 +111,5 @@ input:focus {
   flex-direction: row;
   gap: 16px;
   margin-top: 8px;
-}
-.back-btn {
-  background: transparent;
-  border: 2px solid var(--color-secondary);
-  color: var(--color-secondary);
-  font-size: 18px;
-  cursor: pointer;
-  width: 145px;
-  height: 45px;
-  padding: 0;
-  transition: color 0.2s, border 0.2s;
-  display: block;
-  border-radius: 8px;
-}
-.back-btn:hover {
-  color: #fff;
-  background: var(--color-secondary);
 }
 </style> 

@@ -2,17 +2,22 @@
   <header class="header-bg">
     <div class="container">
       <div class="header-left">
-        <div class="logo">TravelBlog</div>
-        <div class="header-slogan">Там, где мир начинается с путешествий</div>
-      </div>
-      <div class="actions">
+        <div class="logo"><svg width="42" height="30" viewBox="0 0 42 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M41.5 25.5H1" stroke="white" stroke-linecap="round"/>
+        <path d="M31.5 29.5H1.5" stroke="white" stroke-linecap="round"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M29.6633 1.26893L29 0C28.8616 0.467337 28.7241 0.923333 28.5871 1.36877C27.1769 5.95537 25.8239 9.42232 24.0856 12.622L19.7769 5.15908L19.1077 4C18.9657 4.43397 18.8248 4.85599 18.6845 5.26699C16.3394 12.1356 14.1519 15.9269 9.62277 21C9.3303 21.3276 9.02806 21.6605 8.71539 22H10.0689H17.5H18.7981H28.3453H29.5H39.3716H40.5L39.9773 21L29.6633 1.26893ZM27.7679 21H19.6083C21.3866 18.7736 22.8389 16.7314 24.0913 14.6319L27.7679 21ZM24.6695 13.6333L28.9226 21H38.8489L29.2431 2.62361C27.8404 7.05074 26.4574 10.4492 24.6695 13.6333ZM23.5166 13.6364C22.1099 16.0657 20.4466 18.3902 18.3239 21H10.9563C12.9517 18.7097 14.499 16.6257 15.8185 14.3417C17.1606 12.0187 18.2524 9.51391 19.3457 6.41227L23.5166 13.6364Z" fill="white"/>
+        </svg>Travel</div>
+        <div class="actions">
         <router-link v-if="!isAuth" to="/login" class="btn">Войти</router-link>
         <router-link v-else to="/profile" class="profile-info">
           <span v-if="user.profile?.photo" class="avatar" :style="`background-image: url('https://travelblog.skillbox.cc${user.profile.photo}')`"></span>
-          <span v-else class="avatar avatar-placeholder">{{ user.profile?.full_name?.[0] || '👤' }}</span>
           <span class="profile-name">{{ user.profile?.full_name }}</span>
         </router-link>
         <button v-if="isAuth" class="btn logout" @click="onLogout">Выйти</button>
+      </div>
+      </div>
+     <div class="header-slogan">
+        {{ sloganText }}
       </div>
     </div>
   </header>
@@ -21,13 +26,17 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useUserStore } from '../store/user'
-import { useRouter } from 'vue-router'
+import { useRouter,useRoute } from 'vue-router'
 
 const user = useUserStore()
 const router = useRouter()
+const route = useRoute() 
 
 const isAuth = computed(() => !!user.token)
 
+const sloganText = computed(() =>
+  route.path === '/' ? 'Там, где мир начинается с путешествий' : 'Истории ваших путешествий'
+)
 async function onLogout() {
   await user.logout()
   router.push('/login')
@@ -47,39 +56,43 @@ async function onLogout() {
   background-position: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   display: flex;
-  align-items: center;
-  height: 250px;
-  min-height: 250px;
+  min-height: 422px;
   margin-top: 0;
 }
 .container {
   width: 100%;
   max-width: var(--container-width);
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   height: 100%;
   padding: 0 var(--gap);
   z-index: 2;
 }
 .header-left {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-bottom: 108px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  padding-bottom: 12px; 
+
 }
 .logo {
-  font-size: 27px;
-  font-weight: bold;
-  color: var(--color-primary);
+  font-size: 33.88px;
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: 0.145em;
+  color: #fff;
+  display: flex;
+  gap: 16px;
 }
 .header-slogan {
-  margin-top: 8px;
-  font-size: 22px;
-  font-weight: 400;
-  color: #fff;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.18);
-  letter-spacing: 0.5px;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 72px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  text-align: center;
 }
 nav {
   display: flex;
@@ -114,14 +127,11 @@ nav a:hover {
   gap: 12px;
 }
 .btn {
-  background: var(--color-primary);
   color: #fff;
   border: none;
-  border-radius: 8px;
-  padding: 0.5em 1.2em;
+  padding: 0.5em ;
   font-size: 16px;
   cursor: pointer;
-  transition: background 0.2s;
 }
 .btn.logout {
   background: var(--color-muted);

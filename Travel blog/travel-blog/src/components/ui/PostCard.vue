@@ -4,7 +4,8 @@
     <div class="post-info">
       <h2>{{ title }}</h2>
       <p class="desc">{{ description }}</p>
-      <div class="meta">Страна: <b>{{ country }}</b> | Город: <b>{{ city }}</b></div>
+      <div class="meta"><b>{{ country }}</b> <b>{{ city }}</b></div>
+       <a class="more-link" @click="openCard">Подробнее</a>
     </div>
   </div>
 </template>
@@ -17,12 +18,18 @@ defineProps<{
   city: string
   image?: string
 }>()
+
+const emit = defineEmits(['open'])
+
+function openCard() {
+  emit('open')
+}
 </script>
 
 <style scoped>
 .post-card {
   background: #fff;
-  border-radius: var(--border-radius);
+  border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   overflow: hidden;
   display: flex;
@@ -30,7 +37,6 @@ defineProps<{
   min-height: 320px;
   cursor: pointer;
   transition: box-shadow 0.2s;
-
   font-size: 20.8px;
 }
 .post-card:hover {
@@ -63,5 +69,23 @@ defineProps<{
 .meta {
   font-size: 15.2px;
   color: var(--color-text);
+}
+
+.meta {
+  font-size: 15.2px;
+  color: var(--color-text);
+}
+.more-link {
+  color:#FFA902;
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+.more-link:hover {
+  color: #FFA902;
+   text-decoration: none;
 }
 </style> 
