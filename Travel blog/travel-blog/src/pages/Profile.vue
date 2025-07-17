@@ -22,7 +22,6 @@
       <div v-else>
         <ProfileForm />
       </div>
-      <button class="back-btn" @click="goBack">← Назад</button>
     </div>
     <div v-else class="user-posts-block">
       <h2>Мои путешествия</h2>
