@@ -171,7 +171,7 @@ onMounted(() => {
   cursor: pointer;
   width: 145px;
   height: 45px;
-  margin: 32px 0 0 0;
+  margin: 32px 0 32px 0;
   padding: 0;
   transition: color 0.2s, border 0.2s;
   display: block;
