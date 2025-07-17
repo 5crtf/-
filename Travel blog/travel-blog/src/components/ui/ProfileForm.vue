@@ -21,10 +21,6 @@
         <img :src="photoUrl" alt="avatar" />
       </div>
     </div>
-    <div class="form-group">
-      <label for="password">Новый пароль</label>
-      <input id="password" v-model="password" type="password" minlength="6" />
-    </div>
     <div v-if="error" class="error">{{ error }}</div>
     <div class="form-actions">
       <button class="back-btn" type="button" @click="goBack">← Назад</button>
