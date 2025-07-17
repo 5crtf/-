@@ -33,7 +33,7 @@ export const useUserStore = defineStore('user', {
         await this.fetchProfile()
         return true
       } catch (e: any) {
-        this.error = e.message || 'Ошибка входа'
+        this.error = 'Неверный email или пароль'
         return false
       } finally {
         this.loading = false
@@ -48,7 +48,7 @@ export const useUserStore = defineStore('user', {
         await this.fetchProfile()
         return true
       } catch (e: any) {
-        this.error = e.message || 'Ошибка регистрации'
+        this.error = 'Этот email уже зарегистрирован'
         return false
       } finally {
         this.loading = false
@@ -60,7 +60,7 @@ export const useUserStore = defineStore('user', {
       try {
         this.profile = await getProfile()
       } catch (e: any) {
-        this.error = e.message || 'Ошибка профиля'
+        this.error = 'Ошибка профиля'
       } finally {
         this.loading = false
       }
